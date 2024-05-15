@@ -1,9 +1,11 @@
 package yerim.son.aimhightojava.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import yerim.son.aimhightojava.domain.Article;
 import yerim.son.aimhightojava.dto.AddArticleRequest;
+import yerim.son.aimhightojava.dto.UpdateArticleRequest;
 import yerim.son.aimhightojava.repository.BlogRepository;
 
 import java.util.List;
@@ -29,5 +31,15 @@ public class BlogService {
 
     public void delete(long id) {
         blogRepository.deleteById(id);
+    }
+
+    @Transactional
+    public Article update(long id, UpdateArticleRequest request) {
+        Article article = blogRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("not found: " + id));
+
+        article.update(request.getTitle(), request.getContent());
+
+        return article;
     }
 }

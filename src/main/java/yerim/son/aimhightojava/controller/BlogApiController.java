@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import yerim.son.aimhightojava.domain.Article;
 import yerim.son.aimhightojava.dto.AddArticleRequest;
 import yerim.son.aimhightojava.dto.ArticleResponse;
+import yerim.son.aimhightojava.dto.UpdateArticleRequest;
 import yerim.son.aimhightojava.service.BlogService;
 
 import java.util.List;
@@ -45,10 +46,18 @@ public class BlogApiController {
     }
 
     @DeleteMapping("/api/articles/{id}")
-    public  ResponseEntity<Void> deleteArticle(@PathVariable long id) {
+    public ResponseEntity<Void> deleteArticle(@PathVariable long id) {
         blogService.delete(id);
 
         return ResponseEntity.ok()
                 .build();
+    }
+
+    @PutMapping("/api/articles/{id}")
+    public ResponseEntity<Article> updateArticle(@PathVariable long id, @RequestBody UpdateArticleRequest request) {
+        Article updateArticle = blogService.update(id, request);
+
+        return ResponseEntity.ok()
+                .body(updateArticle);
     }
 }
