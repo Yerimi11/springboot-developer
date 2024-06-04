@@ -21,6 +21,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
+    implementation("io.jsonwebtoken:jjwt:0.9.1")
+    implementation("javax.xml.bind:jaxb-api:2.3.1") // XML 문서와 Java 객체 간 매핑 자동화
 
     runtimeOnly("com.h2database:h2") // 인메모리 데이터베이스
 
@@ -29,6 +31,9 @@ dependencies {
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
+    testImplementation("org.projectlombok:lombok")
+
+    testAnnotationProcessor("org.projectlombok:lombok")
 }
 
 test {
