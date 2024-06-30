@@ -33,10 +33,16 @@ public class User implements UserDetails {
     private String nickname;
 
     @Builder
-    public User(String email, String password, String auth, String nickname) {
+    public User(String email, String password, String nickname) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
+    }
+
+    public User update(String nickname) {
+        this.nickname = nickname;
+
+        return this;
     }
 
     @Override
@@ -72,11 +78,5 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public User update(String nickname) {
-        this.nickname = nickname;
-
-        return this;
     }
 }
